@@ -10,12 +10,7 @@ This page explains how to interact with the game UI.
 - **Hand / Cards View:** squadron cards, enabler cards, discard piles
 - **Log / Event Feed:** dice rolls, acquisitions, shots, phase changes
 
-## Mouse controls (typical)
-- **Select token/card:** Left-click
-- **Confirm action:** Click a button (e.g., “Confirm Move”, “End Turn”)
-- **Cancel:** Right-click or `Esc` (if supported)
-
-## Common actions (typical)
+## Common actions
 ### Move
 1. Select a friendly token
 2. Choose a destination (band/space)
@@ -33,12 +28,6 @@ This page explains how to interact with the game UI.
 3. Roll/resolve attack
 4. Apply damage/markers
 
-## Keyboard shortcuts (optional)
-If implemented, document them here:
-- `Esc` — Cancel / back
-- `Space` — End turn
-- `H` — Help overlay
-
 ## UI tips
 - Face-down tokens usually mean “unknown to the enemy.”
-- Tooltips (hover) should explain token stats and allowed actions (if implemented).
+- Tooltips (hover) should explain token stats and allowed actions (when implemented).
