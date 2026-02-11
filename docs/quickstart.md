@@ -2,11 +2,11 @@
 
 This is the fastest path to getting the game running.
 
-## 1) Get the project
-- **Option A (recommended):** clone the repo with Git
+## Get the project
+- **Option A:** clone the repo with Git
 - **Option B:** download the ZIP from GitHub and unzip it
 
-## 2) Create a Python virtual environment (recommended)
+## Create a Python virtual environment
 
 ### Windows (PowerShell)
 ```powershell
@@ -20,15 +20,15 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-## 3) Install dependencies
-From the project root (the folder that contains `requirements.txt`):
+## Install dependencies
+From the project root (folder containing `requirements.txt`):
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4) Run the game
-This repo’s entry point may change during development. Try one of these common options:
+## Run the game
+Repo’s entry point may change during development. Try one of these options:
 
 ```bash
 python main.py
@@ -40,8 +40,6 @@ or, if you have a `src/` package:
 python -m src.main
 ```
 
-If neither works, look for the file that creates the Pygame window (often named `main.py`, `app.py`, `run.py`, or `ui_pygame.py`).
-
-## 5) Learn the basics
+## Learn the basics
 - Start with: [User Guide](user-guide.md)
 - If you get stuck: [Troubleshooting](troubleshooting.md)
