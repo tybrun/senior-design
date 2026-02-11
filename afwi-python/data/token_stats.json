@@ -1,0 +1,31 @@
+{
+  "tokens": {
+    "US_001": {
+      "name": "US Example 5G Fighter",
+      "category": "FIGHTER_5G",
+      "move": 2,
+      "sensor": 2,
+      "acquisition_bonus": 0,
+      "missile": {"range": 2, "hit": 3},
+      "bomb": {"range": 1, "hit": 3}
+    },
+    "US_002": {
+      "name": "US Example UAS",
+      "category": "UAS",
+      "move": 3,
+      "sensor": 3,
+      "acquisition_bonus": 1,
+      "missile": {"range": 2, "hit": 3},
+      "uas_infinite_ammo": true,
+      "can_deploy_any_band": true
+    },
+    "PRC_001": {
+      "name": "PRC Example 4G Fighter",
+      "category": "OTHER",
+      "move": 2,
+      "sensor": 2,
+      "acquisition_bonus": 0,
+      "missile": {"range": 2, "hit": 3}
+    }
+  }
+}
