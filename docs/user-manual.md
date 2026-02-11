@@ -10,7 +10,7 @@ Use this manual for quick lookup and definitions.
 - **Squadron:** A card that represents a set of assets that can deploy tokens.
 
 For more help go to
- - [Rules](/game-resources/AFWIRulesV10 01.8.24.pdf)
+ - [Rules](game-resources/AFWIRulesV10 01.8.24.pdf)
  - [Glossary](/game-resources/AFWI Glossary.pdf)
  - [Move Flow Chart](/game-resources/Move Flow Chart.pptx)
  - [Base Strike Flowchart](/game-resources/AFWI Base Strike Flowchart.pptx)
