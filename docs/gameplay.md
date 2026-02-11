@@ -2,8 +2,6 @@
 
 This walkthrough is written for players who want a step-by-step view of a typical game.
 
-> Your implementation may simplify steps while you build the prototype. That’s okay—update this page as features land.
-
 ## 1) Campaign setup
 1. Choose a campaign/scenario (how many ATO cycles, which map/setup)
 2. Each player chooses a mission (often secret until end)
@@ -12,8 +10,8 @@ This walkthrough is written for players who want a step-by-step view of a typica
 ## 2) Start an ATO cycle
 ### Choose posture
 Posture may affect:
-- how many squadron cards you can use
-- how many enabler cards you can draw/play
+- How many squadron cards you can use
+- How many enabler cards you can draw/play
 - other special conditions
 
 ### Draw cards
@@ -24,8 +22,8 @@ Place selected squadrons at airbases (usually face down).
 
 ## 3) Initiative + Intelligence (if supported)
 Many AFWI flows include:
-- a bid for initiative (possibly discarding cards for bonuses)
-- an intel roll (sometimes with advantage/disadvantage)
+- A bid for initiative (possibly discarding cards for bonuses)
+- An intel roll (sometimes with advantage/disadvantage)
 These steps determine who acts first and what information is revealed.
 
 ## 4) Turns (repeat until both pass)
@@ -48,19 +46,12 @@ Attack a target in range. Apply results (markers, damage, or destruction).
 ## 5) End of ATO cycle
 When both players pass, the ATO cycle ends.
 Depending on your build, you may:
-- clear certain temporary effects
-- advance to the next ATO
-- update the UI/log with a summary
+- Clear certain temporary effects
+- Advance to the next ATO
+- Update the UI/log with a summary
 
 ## 6) End of campaign
 At campaign end:
-- reveal mission cards (if secret)
-- compute VP
-- declare winner
-
-## Suggested screenshots to add
-- ATO start screen (posture + draw)
-- Squadron placement
-- An “Acquire” result
-- A “Shoot” resolution
-- End-of-ATO summary
+- Reveal mission cards (if secret)
+- Compute VP
+- Declare winner
