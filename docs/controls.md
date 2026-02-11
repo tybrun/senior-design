@@ -2,8 +2,6 @@
 
 This page explains how to interact with the game UI.
 
-> Replace placeholders once your controls are finalized. The goal is to keep this page short and practical.
-
 ## Main screens you may see
 - **Main Menu:** Start Game, Load Game, Settings, Quit
 - **Board View:** tokens, bases, tracks, range bands
