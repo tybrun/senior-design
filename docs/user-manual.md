@@ -9,7 +9,12 @@ Use this manual for quick lookup and definitions.
 - **Enabler:** A card that provides multi-domain effects (intel/cyber/logistics/etc.).
 - **Squadron:** A card that represents a set of assets that can deploy tokens.
 
-If you have a project glossary PDF or rules PDF, link it here as well.
+For more help go to
+ - [Rules](/game-resources/AFWIRulesV10 01.8.24.pdf)
+ - [Glossary](/game-resources/AFWI Glossary.pdf)
+ - [Move Flow Chart](/game-resources/Move Flow Chart.pptx)
+ - [Base Strike Flowchart](/game-resources/AFWI Base Strike Flowchart.pptx)
+ - [Token Depiction Chart](/game-resources/AFWI Token Depiction Chart.pptx)
 
 ## Game objects
 
