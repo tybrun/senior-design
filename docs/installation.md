@@ -6,9 +6,9 @@ This project is a Python-based virtual version of the AFWI board game.
 - **Python 3.10+** recommended
 - **Git** (optional, but recommended)
 
-## Step-by-step installation
+## Installation Process
 
-### 1) Download the project
+### Download the project
 Clone with Git:
 ```bash
 git clone https://github.com/tybrun/senior-design.git
@@ -17,7 +17,7 @@ cd senior-design
 
 Or download ZIP from GitHub and unzip it.
 
-### 2) Create a virtual environment
+### Create a virtual environment
 Virtual environments keep your dependencies isolated and avoid version conflicts.
 
 #### Windows (PowerShell)
@@ -32,12 +32,12 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3) Install dependencies
+### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4) Run the game
+### Run the game
 Try:
 ```bash
 python main.py
