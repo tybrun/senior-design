@@ -20,44 +20,22 @@ For more help go to
 
 ### Tokens
 Tokens represent units on the board (air, maritime, IAMD, etc.). Common properties:
-- movement
-- attack range / strength
-- defense / survivability
-- acquisition / sensor power
-
-> Document your exact token stats source here (JSON/CSV/XLSX) when finalized.
+- Movement
+- Attack range / strength
+- Defense / survivability
+- Acquisition / sensor power
 
 ### Cards
 #### Squadron cards
-- generate / enable deployment of tokens
-- can be destroyed or disabled depending on rules
+- Generate / enable deployment of tokens
+- Can be destroyed or disabled depending on rules
 
 #### Enabler cards
-- usually played once, sometimes persistent for an ATO
-- can affect initiative, intel, cyber, movement, targeting, etc.
+- Usually played once, sometimes persistent for an ATO
+- Can affect initiative, intel, cyber, movement, targeting, etc.
 
 #### Mission cards
-- define scoring conditions
+- Define scoring conditions
 
 #### Posture cards
-- define limits and special conditions for an ATO
-
-## Dice and resolution (template)
-Document your in-game dice rules:
-- what die is used (d4/d6/etc.)
-- how advantage/disadvantage works
-- what “success” means (threshold vs opposed roll)
-- how damage is applied
-
-## Saving and loading (if supported)
-- Where save files are stored
-- What is saved (board state, hands, tracks)
-- Known limitations
-
-## File locations (fill in for your repo)
-- Token images: `assets/tokens/`
-- Card images: `assets/cards/`
-- Data files (stats): `data/`
-- Saves/logs: `saves/` or `logs/`
-
-Update these paths to match your actual project structure.
+- Define limits and special conditions for an ATO
