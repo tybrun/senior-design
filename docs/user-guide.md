@@ -42,10 +42,3 @@ Many tokens begin **face down**. This represents uncertainty: your opponent does
 ## Ending an ATO cycle
 When both players pass, the ATO cycle ends and you proceed to the next cycle (if any). Scoring usually happens at the end
 of the campaign.
-
-## Screenshots
-Add screenshots to `docs/screenshots/` and link them here. Suggested:
-- Main menu
-- Board view
-- Card/hand view
-- A sample Move/Acquire/Shoot
