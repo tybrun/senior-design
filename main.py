@@ -336,7 +336,7 @@ def try_acquire(gs, acq, tgt):
     if acq.side==Side.PRC and any(e.effect=="acq_bonus_all" for e in gs.prc_enb_enduring): bonus+=1
     disadv = any(e.effect=="disadv_acquire_all" for e in
                  (gs.prc_enb_enduring if acq.side==Side.US else gs.us_enb_enduring))
-    r = roll_d4(disadvantage=disadv, bonus=bonus)
+    r = roll_d4(disadv=disadv, bonus=bonus)
     gs.log(f"Acquire: {acq.tdef.name}→{tgt.tdef.name} need {needed}, rolled {r}", CYAN)
     gs.turn_acquired = True
     if r >= needed:
@@ -366,7 +366,7 @@ def try_shoot(gs, shooter, tgt):
     if d > ar: gs.log(f"Out of range ({d}>{ar}).", ORANGE); return False
     disadv = any(e.effect=="disadvantage_shot" for e in
                  (gs.prc_enb_played if shooter.side==Side.US else gs.us_enb_played))
-    r = roll_d4(disadvantage=disadv)
+    r = roll_d4(disadv=disadv)
     gs.log(f"Shot: {shooter.tdef.name}→{tgt.tdef.name} need {roll_need}+, rolled {r}", CYAN)
     # Winchester: unit runs out of ammo (normal fighters on non-4 roll, UAS on 1-2)
     w = shooter.tdef.winchester
@@ -378,7 +378,7 @@ def try_shoot(gs, shooter, tgt):
         dmg = 1
         # Exploding weapons (bombers) roll again for bonus damage
         if exploding:
-            dmg = roll_d4(disadvantage=disadv)
+            dmg = roll_d4(disadv=disadv)
             gs.log(f"  Exploding → {dmg} damage!", GOLD)
         tgt.destroyed = True
         (gs.us_destroyed if shooter.side==Side.US else gs.prc_destroyed).append(tgt)
@@ -416,6 +416,17 @@ def score_interdiction(gs, side):
         elif c in (TokenCat.SHIP_DDG,TokenCat.SHIP_CG,TokenCat.ADA_MID,TokenCat.ADA_LONG): vp+=3
         else: vp+=2
     return vp
+
+def _score_for(gs, side):
+    """Route to the correct scoring function based on the side's chosen mission."""
+    m = gs.us_mission if side==Side.US else gs.prc_mission
+    if m and m.name == "Interdiction":
+        return score_interdiction(gs, side)
+    return score_attrition(gs, side)  # default / Attrition fallback
+
+def calc_live_vp(gs, side):
+    """Return accumulated VP from past ATOs plus current ATO's live score."""
+    return (gs.us_vp if side==Side.US else gs.prc_vp) + _score_for(gs, side)
 
 # ══════════════════════════════════════════════════════════════════
 #  TUTORIAL STEPS
@@ -497,7 +508,7 @@ class App:
             else:
                 # Second click: select enemy token to acquire
                 if tok and tok.side != gs.active_side:
-                    try_acquire(gs, gs.sel_tok, tok); gs.sel_tok=None; gs.sub=""
+                    if try_acquire(gs, gs.sel_tok, tok): gs.sel_tok=None; gs.sub=""
                 elif tok and tok.side == gs.active_side:
                     gs.sel_tok = tok; gs.log(f"Changed acquirer to {tok.tdef.name}. Now click enemy.", CYAN)
                 else:
@@ -513,7 +524,7 @@ class App:
                     gs.log("Click one of your tokens to use as shooter.", GRAY)
             else:
                 if tok and tok.side != gs.active_side:
-                    try_shoot(gs, gs.sel_tok, tok); gs.sel_tok=None; gs.sub=""
+                    if try_shoot(gs, gs.sel_tok, tok): gs.sel_tok=None; gs.sub=""
                 elif tok and tok.side == gs.active_side:
                     gs.sel_tok = tok; gs.log(f"Changed shooter to {tok.tdef.name}. Now click enemy.", CYAN)
                 else:
@@ -811,11 +822,12 @@ class App:
 
     def _next_ato(self):
         gs = self.gs
-        vp_us = score_attrition(gs, Side.US); vp_prc = score_attrition(gs, Side.PRC)
+        vp_us = _score_for(gs, Side.US); vp_prc = _score_for(gs, Side.PRC)
         gs.us_vp += vp_us; gs.prc_vp += vp_prc
         gs.log(f"ATO {gs.ato_num}: US +{vp_us} VP, PRC +{vp_prc} VP", GOLD)
         # Clear all ATO-scoped state before the next cycle
         gs.tokens.clear(); gs.us_enb_played.clear(); gs.prc_enb_played.clear()
+        gs.us_enb_enduring.clear(); gs.prc_enb_enduring.clear()
         gs.us_destroyed.clear(); gs.prc_destroyed.clear()
         for sq in gs.us_sqns+gs.prc_sqns: sq.activated=False
         gs.us_sqns.clear(); gs.prc_sqns.clear()
@@ -826,8 +838,8 @@ class App:
     def _end_game(self):
         gs = self.gs
         if gs.phase != Phase.GAME_END:
-            gs.us_vp += score_attrition(gs, Side.US)
-            gs.prc_vp += score_attrition(gs, Side.PRC)
+            gs.us_vp += _score_for(gs, Side.US)
+            gs.prc_vp += _score_for(gs, Side.PRC)
         gs.phase = Phase.GAME_END
         gs.log(f"GAME OVER! US: {gs.us_vp} VP | PRC: {gs.prc_vp} VP", GOLD)
         w = "US WINS!" if gs.us_vp>gs.prc_vp else ("PRC WINS!" if gs.prc_vp>gs.us_vp else "DRAW!")
@@ -971,10 +983,16 @@ class App:
     def _d_side(self):
         """Draw VP panel at top and game log at bottom."""
         s = self.screen; gs = self.gs
+        # Compute live VP: past ATO totals + current ATO kills so far
+        live_us = calc_live_vp(gs, Side.US) if gs.phase == Phase.PLAYER_TURN else gs.us_vp
+        live_prc = calc_live_vp(gs, Side.PRC) if gs.phase == Phase.PLAYER_TURN else gs.prc_vp
         # VP panel: shows score, cyber track, intel status, and live token counts
         draw_panel(s, pygame.Rect(SIDE_X, 8, SIDE_W, 55), PANEL, CYAN)
-        txt(s, f"US VP: {gs.us_vp}", (SIDE_X+10,12), US_CLR, 18, True)
-        txt(s, f"PRC VP: {gs.prc_vp}", (SIDE_X+10,33), PRC_CLR, 18, True)
+        txt(s, f"US VP: {live_us}", (SIDE_X+10,12), US_CLR, 18, True)
+        txt(s, f"PRC VP: {live_prc}", (SIDE_X+10,33), PRC_CLR, 18, True)
+        # Show a small "(live)" indicator so players know the score is actively updating
+        if gs.phase == Phase.PLAYER_TURN:
+            txt(s, "live", (SIDE_X+130, 20), (80,180,120), 11, False)
         txt(s, f"Cyber US:{gs.us_cyber} PRC:{gs.prc_cyber}", (SIDE_X+170,12), CYAN, 13)
         txt(s, f"Intel US:{'ADV' if gs.us_intel_adv else 'NRM'} PRC:{'ADV' if gs.prc_intel_adv else 'NRM'}",
             (SIDE_X+170,28), GOLD, 13)
@@ -1271,9 +1289,10 @@ class App:
         draw_panel(s, pygame.Rect(60,30,WIDTH-120,HEIGHT-80), PANEL, GOLD, 10)
         txt(s, f"ATO {gs.ato_num} COMPLETE", (WIDTH//2,60), GOLD, 34, True, True)
         y = 110
-        txt(s, f"US destroyed {len(gs.us_destroyed)} PRC tokens", (WIDTH//2,y), US_CLR, 20, False, True)
-        txt(s, f"PRC destroyed {len(gs.prc_destroyed)} US tokens", (WIDTH//2,y+28), PRC_CLR, 20, False, True)
-        txt(s, f"Score: US {gs.us_vp} VP | PRC {gs.prc_vp} VP", (WIDTH//2,y+65), GOLD, 18, False, True)
+        ato_us = _score_for(gs, Side.US); ato_prc = _score_for(gs, Side.PRC)
+        txt(s, f"US +{ato_us} VP this ATO ({gs.us_vp + ato_us} total)", (WIDTH//2,y), US_CLR, 20, False, True)
+        txt(s, f"PRC +{ato_prc} VP this ATO ({gs.prc_vp + ato_prc} total)", (WIDTH//2,y+28), PRC_CLR, 20, False, True)
+        txt(s, f"Score: US {gs.us_vp + ato_us} VP | PRC {gs.prc_vp + ato_prc} VP", (WIDTH//2,y+65), GOLD, 18, False, True)
         remain = gs.max_ato - gs.ato_num
         if remain > 0:
             txt(s, f"{remain} ATO{'s' if remain>1 else ''} remaining", (WIDTH//2,y+100), WHITE, 16, False, True)

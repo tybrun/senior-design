@@ -107,8 +107,8 @@ T = {
  "us_cg":   TokenDef("us_cg","US Cruiser",_C.SHIP_CG,_U,1,2,1,1, 3,2,False, 3,2,True, 2,False,False, True,3,"naval",4, "guided_missile_cruiser_front.png","guided_missile_cruiser_back.png"),
  "us_recon":TokenDef("us_recon","Recon UAS",_C.UAS_RECON,_U,1,3,0,1, 0,0,False, 0,0,False, 2,False,False, False,0,"never",0, "recon_uas_front.png","recon_uas_back.png"),
  "j20b":    TokenDef("j20b","J-20B",_C.FIGHTER_5TH,_P,2,2,1,1, 1,2,False, 0,0,False, 4,False,True, False,0,"normal",0, "j20b_front.png","j20b_back.png"),
- "j16":     TokenDef("j16","J-16",_C.FIGHTER_4TH,_P,2,2,0,1, 1,2,False, 1,2,False, 2,False,False, False,0,"normal",0, "j15_front.png","j16_back.png"),
- "j15":     TokenDef("j15","J-15",_C.FIGHTER_4TH,_P,2,2,0,1, 1,2,False, 1,2,False, 2,False,False, False,0,"normal",0, "j15_front.png","j16_back.png"),
+ "j16":     TokenDef("j16","J-16",_C.FIGHTER_4TH,_P,2,2,0,1, 1,2,False, 1,2,False, 2,False,False, False,0,"normal",0, "j16_front.png","j16_back.png"),
+ "j15":     TokenDef("j15","J-15",_C.FIGHTER_4TH,_P,2,2,0,1, 1,2,False, 1,2,False, 2,False,False, False,0,"normal",0, "j15_front.png","j15_back.png"),
  "h6k":     TokenDef("h6k","H-6K",_C.BOMBER,_P,1,2,0,1, 0,0,False, 6,2,True, 2,True,False, False,0,"normal",0, "h6k_front.png","h6k_back.png"),
  "prc_aew": TokenDef("prc_aew","AEW",_C.AEW,_P,1,3,2,2, 0,0,False, 0,0,False, 2,True,False, False,0,"never",0, "aew_front.png","aew_back.png"),
  "atk_uas": TokenDef("atk_uas","Attack UAS",_C.UAS_ATTACK,_P,1,2,0,1, 0,0,False, 1,3,False, 2,False,False, False,0,"uas",0, "attack_uas_front.png","recon_uas_back.png"),
@@ -123,15 +123,15 @@ T = {
 # ════════════════════════════════════════════════════════════════════
 US_SQN = [
  SquadronDef("010","480th Fighter Sqn",_U,"f16c",4,2,"band1","010_480th_fighter_squadron_front.png"),
- SquadronDef("002","94th Fighter Sqn",_U,"f22",4,2,"band1","010_480th_fighter_squadron_front.png",is_5th=True),
- SquadronDef("003","23rd Bomb Sqn",_U,"b52",2,2,"standoff","010_480th_fighter_squadron_front.png",is_bomber=True,is_long=True),
+ SquadronDef("002","94th Fighter Sqn",_U,"f22",4,2,"band1","016_aerial_refueling_ar_front.png",is_5th=True),
+ SquadronDef("003","23rd Bomb Sqn",_U,"b52",2,2,"standoff","016_aerial_refueling_ar_front.png",is_bomber=True,is_long=True),
  SquadronDef("001","124th Attack Sqn",_U,"us_recon",4,2,"any","001_124th_attack_squadron_front.png"),
- SquadronDef("005","Missile Def Btry",_U,"us_md",2,2,"airbase","010_480th_fighter_squadron_front.png"),
- SquadronDef("006","DDG-81 Group",_U,"ddg81",1,2,"any","010_480th_fighter_squadron_front.png"),
- SquadronDef("007","44th Fighter Sqn",_U,"f22",4,2,"band1","010_480th_fighter_squadron_front.png",is_5th=True),
+ SquadronDef("005","Missile Def Btry",_U,"us_md",2,2,"airbase","037_maritime_missile_defense_front.png"),
+ SquadronDef("006","DDG-81 Group",_U,"ddg81",1,2,"any","037_maritime_missile_defense_front.png"),
+ SquadronDef("007","44th Fighter Sqn",_U,"f22",4,2,"band1","016_aerial_refueling_ar_front.png",is_5th=True),
  SquadronDef("008","35th Fighter Sqn",_U,"f16c",4,2,"band1","010_480th_fighter_squadron_front.png"),
- SquadronDef("009","69th Bomb Sqn",_U,"b52",2,2,"standoff","010_480th_fighter_squadron_front.png",is_bomber=True,is_long=True),
- SquadronDef("011","Cruiser Group",_U,"us_cg",1,2,"any","010_480th_fighter_squadron_front.png"),
+ SquadronDef("009","69th Bomb Sqn",_U,"b52",2,2,"standoff","016_aerial_refueling_ar_front.png",is_bomber=True,is_long=True),
+ SquadronDef("011","Cruiser Group",_U,"us_cg",1,2,"any","037_maritime_missile_defense_front.png"),
 ]
 
 PRC_SQN = [
