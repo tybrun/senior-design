@@ -1,6 +1,6 @@
 Table of Contents
 
-1. Project Description
+1. [Project Description](project_description.md)
 2. UI Specs
 3. Test Plan/Results
 4. User Manual
